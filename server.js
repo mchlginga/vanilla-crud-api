@@ -35,6 +35,14 @@ const parseBody = async (req) => {
     });
 };
 
+const newTitle = (t) => {
+    try {
+        return t.trim().toLowerCase().replace(/\s+/g, '-');
+    } catch (error) {
+        console.log("Error creating new title:", error.message);
+    }
+};
+
 // create server
 const server = http.createServer (async (req, res) => {
     try {
@@ -51,11 +59,41 @@ const server = http.createServer (async (req, res) => {
                 return res.end(JSON.stringify(notes, null, 2));
             } catch (error) {
                 res.writeHead(500, {"Content-Type": "application/json"});
-                return res.end(JSON.stringify({error: "Failed to read notes."}));
+                return res.end("Failed to read notes.");
+            }
+        }
+
+        // POST /notes
+        if (method === "POST" && pathname === "/notes") {
+            try {
+                const body = await parseBody(req);
+                const notes = JSON.parse(await fs.readFile(noteFile, "utf-8"));
+
+                // check if the note is already exist
+                const exist = notes.find(note => newTitle(note.title) === newTitle(body.title));
+                if (exist){
+                    res.writeHead(409, {"Content-Type": "application/json"});
+                    return res.end("Note is already exist.")
+                }
+
+                const newNote = {
+                    id: Date.now(),
+                    title: body.title,
+                    body: body.body
+                };
+
+                notes.push(newNote);
+                await fs.writeFile(noteFile, JSON.stringify(notes, null, 2));
+
+                res.writeHead(201, {"Content-Type": "application/json"});
+                return res.end (JSON.stringify(newNote, null, 2));
+            } catch (error) {
+                res.writeHead(500, {"Content-Type": "application/json"});
+                return res.end("Failed to create note.");
             }
         }
     } catch (error) {
-        res.end("Error creating a server:", error.message);
+        console.log("Error starting server:", error.message);
     }
 });
 
