@@ -17,21 +17,45 @@ const ensureNoteFile = async () => {
     }
 };
 
+// parse json body from post
+const parseBody = async (req) => {
+    return new Promise ((resolve, reject) => {
+        let data = "";
+        req.on("data", chunk => data += chunk);
+
+        req.on ("end", () => {
+            try {
+                resolve(JSON.parse(data));
+            } catch (error) {
+                reject(new Error("Invalid JSON"));
+            }
+        });
+
+        req.on("error", reject);
+    });
+};
+
+// create server
 const server = http.createServer (async (req, res) => {
     try {
         await ensureNoteFile();
         const {pathname} = parse(req.url, true);
-        const method = url.method;
+        const method = req.method;
 
         // GET /notes
         if (method === "GET" && pathname === "/notes") {
-            const notes = JSON.parse(await fs.readFile(noteFile, "utf-8"));
+            try {
+                const notes = JSON.parse(await fs.readFile(noteFile, "utf-8"));
+                res.writeHead (200, {"Content-Type": "application/json"});
 
-            res.writeHead(200, {"Content:Type": "application/json"});
-            return res.end(JSON.stringify(notes));
+                return res.end(JSON.stringify(notes, null, 2));
+            } catch (error) {
+                res.writeHead(500, {"Content-Type": "application/json"});
+                return res.end(JSON.stringify({error: "Failed to read notes."}));
+            }
         }
     } catch (error) {
-        console.log("Error creating a server:", error.message);
+        res.end("Error creating a server:", error.message);
     }
 });
 
