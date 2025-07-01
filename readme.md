@@ -12,7 +12,7 @@ Each note will be stored in a notes.json file with structure like:
 
 1. Create HTTP server.
 2. Parse request URL and method (GET, POST, PUT, DELETE)
-3. Setup dynamic routing with url.pathname and url.searchParams
+3. Setup dynamic routing with url.pathname
 4. For POST/PUT, manually parse request body (JSON)
 5. Read notes.json, manipulate data, and respond
 6. Set proper headers: Content-Type, statusCode
