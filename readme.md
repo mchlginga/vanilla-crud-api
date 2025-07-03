@@ -8,6 +8,12 @@ Each note will be stored in a notes.json file with structure like:
 
 ---
 
+## Code Organization
+
+This project follows a **modular architecture** to separate concerns and improve maintainability. While this is a simple CRUD API, I've organized the code into logical modules to practice proper project structure for future larger applications.
+
+---
+
 ## Code Flow
 
 1. Create HTTP server.
