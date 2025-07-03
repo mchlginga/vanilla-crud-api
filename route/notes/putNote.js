@@ -40,6 +40,7 @@ const putNotes = async (req, res) => {
         // success response with log and updated notes
         res.writeHead(HTTP_STATUS.OK, JSON_HEADER);
         await fs.writeFile(PATHS.noteFile, JSON.stringify(notes, null, 2));
+        await logger(`PUT /notes - Updated note: "${body.title}"`);
 
         return res.end(JSON.stringify(matchedNote, null, 2));
 
