@@ -1,12 +1,19 @@
-7/1/2025 10:59 PM - GET /notes - No notes found
-7/1/2025 10:59 PM - POST /notes - Created note: "Suffer"
-7/1/2025 10:59 PM - POST /notes - Created note: "I Wonder"
-7/1/2025 11:00 PM - POST /notes - Created note: "Fly"
-7/1/2025 11:00 PM - GET /notes - Returned 3 notes
-7/1/2025 11:00 PM - POST /notes - Note already exists: "I Wonder"
-7/1/2025 11:01 PM - PUT /notes - Update note: "See test"
-7/1/2025 11:02 PM - GET /notes - Returned 3 notes
-7/1/2025 11:02 PM - DELETE /notes/1751382000598 - Successfully deleted note
-7/1/2025 11:02 PM - GET /notes - Returned 2 notes
-7/1/2025 11:23 PM - GET /notes - Returned 2 notes
-7/2/2025 12:35 AM - GET /notes - Returned 2 notes
+7/3/2025 06:21 PM - GET /notes - Returned 2 notes
+7/3/2025 06:23 PM - POST /notes - Created note: "test"
+7/3/2025 06:23 PM - GET /notes - Returned 3 notes
+7/3/2025 06:24 PM - GET /notes - Returned 3 notes
+7/3/2025 06:25 PM - GET /notes - Returned 3 notes
+7/3/2025 06:26 PM - DELETE /notes/1751538207759 - Successfully deleted note
+7/3/2025 06:26 PM - GET /notes - Returned 2 notes
+7/3/2025 06:29 PM - GET /notes - Returned 2 notes
+7/3/2025 06:30 PM - PUT /notes - Note not found.: "test update"
+7/3/2025 06:30 PM - POST /notes - Created note: "test"
+7/3/2025 06:30 PM - GET /notes - Returned 3 notes
+7/3/2025 06:30 PM - PUT /notes - Updated note: "test update"
+7/3/2025 06:31 PM - GET /notes - Returned 3 notes
+7/3/2025 06:34 PM - GET /notes - Returned 3 notes
+7/3/2025 06:34 PM - DELETE /notes - Error: Invalid JSON.
+7/3/2025 06:35 PM - GET /notes - Returned 3 notes
+7/3/2025 06:35 PM - DELETE /notes - Deleted note: "undefined"
+7/3/2025 06:35 PM - GET /notes - Returned 2 notes
+7/3/2025 06:36 PM - GET /notes - Returned 2 notes
